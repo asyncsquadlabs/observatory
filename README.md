@@ -1,6 +1,18 @@
 # Observatory 🔭
 
-A lightweight, local telemetry stack for testing metrics, traces, and APM dashboards before deploying to any environment.
+> **See everything. Deploy confidently.**
+>
+> A batteries-included, local-first telemetry stack that lets you test metrics, traces, and APM dashboards on your machine — before they ever touch production.
+
+---
+
+## 🚀 What is Observatory?
+
+**Observatory** is a lightweight, open-source telemetry sandbox built for developers and teams who want to *know* their observability works before shipping it. No cloud accounts. No complex setups. No surprises at 2 AM.
+
+Spin up Prometheus, Grafana, and Jaeger in seconds with a single, resource-conscious Compose file. Wire in your app. Validate your dashboards. Inspect your traces. Then deploy with confidence.
+
+**Built for:** Local development · Integration testing · Pre-production validation · Onboarding new team members · Demo environments
 
 ## Stack
 

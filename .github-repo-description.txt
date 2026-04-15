@@ -1,0 +1,1 @@
+🔭 A lightweight, local-first telemetry stack (Prometheus + Grafana + Jaeger) for testing metrics, traces, and APM dashboards before deploying to production. Podman & Docker compatible.
