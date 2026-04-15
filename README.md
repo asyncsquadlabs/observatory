@@ -121,6 +121,21 @@ observatory/
 └── README.md
 ```
 
+## 🌿 Branch Workflow
+
+`main` is protected. After initial setup, no direct commits allowed.
+
+```bash
+# Install the hook (once per clone)
+cp scripts/githooks/pre-commit .git/hooks/pre-commit
+chmod +x .git/hooks/pre-commit
+
+# Work on branches
+git checkout -b feat/my-change
+# ... commit ...
+# open PR to main
+```
+
 ## License
 
 MIT — use it, fork it, improve it.
