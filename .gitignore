@@ -3,7 +3,8 @@ prometheus-data/
 grafana-data/
 jaeger-data/
 
-# Environment overrides
+# Environment files
+.env
 .env.local
 .env.*.local
 

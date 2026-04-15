@@ -34,6 +34,16 @@ Total reserved: **≈ 1.25 GB RAM / 1.5 vCPU**
 | Grafana | 256 MB | 0.5 |
 | Jaeger | 512 MB | 0.5 |
 
+## 🔒 Security Note
+
+By default, all services bind to **`127.0.0.1`** (localhost) so they are **not** exposed to your network.  
+Grafana ships with a default admin password (`admin`). For local testing this is fine, but **change it** in `.env` if you ever bind to `0.0.0.0`.
+
+```bash
+cp .env.example .env
+# edit .env and set GRAFANA_ADMIN_PASSWORD to something strong
+```
+
 ## Prerequisites
 
 - [Podman](https://podman.io/) + `podman-compose`
