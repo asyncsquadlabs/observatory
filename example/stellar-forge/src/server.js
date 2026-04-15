@@ -187,8 +187,12 @@ app.get('/api/jobs', (req, res) => {
 
 app.post('/api/jobs', (req, res) => {
   const { type, payload } = req.body || {};
-  const job = enqueueJob(type, payload);
-  res.status(201).json({ job });
+  try {
+    const job = enqueueJob(type, payload);
+    res.status(201).json({ job });
+  } catch (err) {
+    res.status(503).json({ error: err.message });
+  }
 });
 
 app.get('/metrics', async (req, res) => {

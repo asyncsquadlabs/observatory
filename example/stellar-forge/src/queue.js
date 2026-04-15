@@ -2,6 +2,9 @@ const { trace, context } = require('@opentelemetry/api');
 const { jobQueueSize, jobsProcessedTotal, jobDuration, workersBusy } = require('./metrics');
 
 const WORKER_COUNT = 3;
+const MAX_QUEUE_SIZE = 1000;
+const MAX_PAYLOAD_KEYS = 10;
+const MAX_PAYLOAD_STRING_LENGTH = 256;
 const queue = [];
 let jobIdSeq = 1;
 const jobHistory = [];
@@ -105,12 +108,37 @@ function startWorkers() {
   }
 }
 
+function sanitizePayload(raw) {
+  if (raw == null || typeof raw !== 'object' || Array.isArray(raw)) {
+    return {};
+  }
+  const keys = Object.keys(raw).slice(0, MAX_PAYLOAD_KEYS);
+  const out = {};
+  for (const k of keys) {
+    if (typeof k !== 'string') continue;
+    const v = raw[k];
+    if (typeof v === 'string') {
+      out[k] = v.slice(0, MAX_PAYLOAD_STRING_LENGTH);
+    } else if (typeof v === 'number' || typeof v === 'boolean') {
+      out[k] = v;
+    } else if (v == null) {
+      out[k] = null;
+    } else {
+      out[k] = '[object]';
+    }
+  }
+  return out;
+}
+
 function enqueueJob(type, payload) {
+  if (queue.length >= MAX_QUEUE_SIZE) {
+    throw new Error('queue full');
+  }
   const validType = JOB_TYPES[type] ? type : 'fast';
   const job = {
     id: jobIdSeq++,
     type: validType,
-    payload: payload || {},
+    payload: sanitizePayload(payload),
     status: 'pending',
     createdAt: new Date().toISOString(),
   };
