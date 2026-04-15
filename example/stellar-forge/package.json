@@ -1,0 +1,26 @@
+{
+  "name": "stellar-forge",
+  "version": "1.0.0",
+  "description": "Example Node.js app that simulates a job forge with Prometheus metrics and OpenTelemetry traces",
+  "main": "src/server.js",
+  "scripts": {
+    "start": "node src/server.js",
+    "dev": "node --watch src/server.js"
+  },
+  "keywords": [
+    "observability",
+    "prometheus",
+    "opentelemetry",
+    "jaeger"
+  ],
+  "author": "",
+  "license": "MIT",
+  "dependencies": {
+    "@opentelemetry/api": "^1.9.0",
+    "@opentelemetry/auto-instrumentations-node": "^0.56.0",
+    "@opentelemetry/exporter-trace-otlp-http": "^0.57.0",
+    "@opentelemetry/sdk-node": "^0.57.0",
+    "express": "^4.21.0",
+    "prom-client": "^15.1.3"
+  }
+}

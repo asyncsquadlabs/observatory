@@ -21,18 +21,20 @@ Spin up Prometheus, Grafana, and Jaeger in seconds with a single, resource-consc
 | **Prometheus** | Metrics collection & TSDB | http://localhost:9090 |
 | **Grafana** | Visualization & dashboards | http://localhost:3000 |
 | **Jaeger** | Distributed tracing / APM | http://localhost:16686 |
+| **Stellar Forge** | Example Node.js app (metrics + traces) | http://localhost:8080 |
 
 > **Why these three?** They give you a complete Metrics + APM + Dashboard loop with the smallest resource footprint. Log aggregation (Loki) can be added later if needed.
 
 ## Resource Footprint
 
-Total reserved: **≈ 1.25 GB RAM / 1.5 vCPU**
+Total reserved: **≈ 1.5 GB RAM / 2.0 vCPU**
 
 | Service | Memory Limit | CPU Limit |
 |---------|-------------|-----------|
 | Prometheus | 512 MB | 0.5 |
 | Grafana | 256 MB | 0.5 |
 | Jaeger | 512 MB | 0.5 |
+| Stellar Forge | 256 MB | 0.5 |
 
 ## 🔒 Security Note
 
@@ -52,13 +54,16 @@ cp .env.example .env
 ## Quick Start
 
 ```bash
-# 1. Start the stack
+# 1. Start the stack (includes the Stellar Forge example app)
 podman-compose up -d
 
 # 2. Check health
 podman-compose ps
 
-# 3. Open Grafana (default login: admin / admin)
+# 3. Open the example app and enqueue some jobs
+open http://localhost:8080
+
+# 4. Open Grafana (default login: admin / admin)
 open http://localhost:3000
 ```
 
@@ -115,6 +120,8 @@ observatory/
 │   │   └── provisioning/   # Auto-loaded datasources & dashboards
 │   └── prometheus/
 │       └── prometheus.yml  # Scrape configs
+├── example/
+│   └── stellar-forge/      # Example Node.js app
 ├── docker-compose.yml
 ├── .env
 ├── .gitignore

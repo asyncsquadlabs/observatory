@@ -17,7 +17,8 @@ scrape_configs:
       - targets: ["observatory-grafana:3000"]
     metrics_path: "/metrics"
 
-  # Example placeholder for your application
-  # - job_name: "my-app"
-  #   static_configs:
-  #     - targets: ["host.containers.internal:8080"]
+  # Example: stellar-forge demo app
+  - job_name: "stellar-forge"
+    static_configs:
+      - targets: ["stellar-forge:8080"]
+    metrics_path: "/metrics"
